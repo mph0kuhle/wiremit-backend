@@ -1,25 +1,32 @@
-from pydantic import BaseModel
+# schemas.py
+
+from pydantic import BaseModel, EmailStr
 from datetime import datetime
 
-# User schemas
+
+class RateResponse(BaseModel):
+    id: int
+    currency: str
+    rate: float
+    timestamp: datetime
+
+    class Config:
+        from_attributes = True 
+
 class UserCreate(BaseModel):
     name: str
-    email: str
+    username: str
+    email: EmailStr
+    password: str
+
+class UserLogin(BaseModel):
+    username: str
     password: str
 
 class UserResponse(BaseModel):
     id: int
     name: str
-    email: str
-
-    class Config:
-        orm_mode = True
-
-# Rate schemas
-class RateResponse(BaseModel):
-    currency_pair: str
-    rate: float
-    timestamp: datetime
+    email: EmailStr
 
     class Config:
         orm_mode = True

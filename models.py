@@ -7,13 +7,14 @@ class User(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, nullable=False)
-    email = Column(String, unique=True, index=True, nullable=False)
+    username = Column(String, unique=True, nullable=False)
+    email = Column(String, unique=True, nullable=False)
     hashed_password = Column(String, nullable=False)
 
 class Rate(Base):
     __tablename__ = "rates"
 
     id = Column(Integer, primary_key=True, index=True)
-    currency_pair = Column(String, index=True, nullable=False)  # e.g., USD-ZAR
+    currency = Column(String, nullable=False)
     rate = Column(Float, nullable=False)
     timestamp = Column(DateTime, default=datetime.utcnow)
